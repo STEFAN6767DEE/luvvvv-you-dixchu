@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#171717">
+
+    <title>For Dixu ♡</title>
+
+    <!-- Matching fonts from index.html -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 18px;
+
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #222;
+            background-image: url("luvv.jpg");
+            background-size: auto 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 430px;
+            padding: 30px 20px;
+
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 28px;
+            text-align: center;
+
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 7px 14px;
+
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.12);
+
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            color: #ff6b98;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(34px, 9vw, 43px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+        }
+
+        .video-frame {
+            width: 100%;
+            margin-bottom: 22px;
+            padding: 7px;
+
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        video {
+            display: block;
+            width: 100%;
+            max-height: 48vh;
+            max-height: 48dvh;
+            aspect-ratio: 9 / 16;
+            object-fit: contain;
+
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        h2 {
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(16px, 4.5vw, 19px);
+            font-weight: 700;
+            line-height: 1.7;
+            margin-bottom: 22px;
+
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+        }
+
+        .buttons {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            min-height: 55px;
+        }
+
+        .yes-link {
+            display: inline-flex;
+            text-decoration: none;
+        }
+
+        button {
+            min-height: 49px;
+            padding: 13px 23px;
+            border: 1px solid transparent;
+            border-radius: 30px;
+
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #yes-btn {
+            color: white;
+            background: linear-gradient(135deg, #ff477e, #e11d48);
+            box-shadow: 0 6px 18px rgba(225, 29, 72, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #yes-btn:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 10px 22px rgba(225, 29, 72, 0.45);
+        }
+
+        #no-btn {
+            position: relative;
+            z-index: 5;
+
+            color: white;
+            background: rgba(35, 35, 35, 0.5);
+            border-color: rgba(255, 255, 255, 0.45);
+            white-space: nowrap;
+            touch-action: manipulation;
+
+            transition: left 0.22s ease, top 0.22s ease;
+        }
+
+        #no-btn:hover {
+            background: rgba(70, 70, 70, 0.75);
+        }
+
+        /* Heart explosion */
+        .heart-particle {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            font-size: 23px;
+            animation: heartBurst 850ms ease-out forwards;
+        }
+
+        @keyframes heartBurst {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0.5) rotate(0deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--x), var(--y))
+                           scale(1.5) rotate(var(--rotation));
+            }
+        }
+
+        .footer {
+            margin-top: 23px;
+            color: white;
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 14px;
+                background-size: auto 100%;
+                background-position: center;
+                background-attachment: scroll;
+            }
+
+            .card {
+                padding: 26px 16px;
+                background: rgba(255, 255, 255, 0.12);
+            }
+
+            h1 {
+                font-size: clamp(34px, 10vw, 42px);
+            }
+
+            video {
+                max-height: 42dvh;
+            }
+
+            .buttons {
+                gap: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #no-btn,
+            #yes-btn {
+                transition: none;
+            }
+
+            .heart-particle {
+                animation-duration: 300ms;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="card">
+
+        <span class="eyebrow">A little confirmation ♡</span>
+
+        <h1>
+            Ethukum intha video paathu<br>
+            neenga thaanu<br>
+            confirm pannikonga 💗
+        </h1>
+
+        <div class="video-frame">
+            <video controls playsinline preload="metadata">
+                <source src="luv.mp4" type="video/mp4">
+                Your browser does not support this video.
+            </video>
+        </div>
+
+        <h2>
+            Unta oru secret sollanum.<br>
+            Ennanu theriyumaa? 🤭
+        </h2>
+
+        <div class="buttons" id="button-area">
+
+            <a href="puzzle.html" class="yes-link">
+                <button id="yes-btn" type="button">
+                    Sollu ❤️
+                </button>
+            </a>
+
+            <button id="no-btn" type="button">
+                Thevailla 🙄
+            </button>
+
+        </div>
+
+        <p class="footer">
+            Just one little secret, Dixu ♡
+        </p>
+
+    </main>
+
+    <script>
+        const noBtn = document.getElementById("no-btn");
+        const card = document.querySelector(".card");
+
+        let isMoving = false;
+
+        function moveNoButton() {
+            if (isMoving) return;
+            isMoving = true;
+
+            const rect = noBtn.getBoundingClientRect();
+            const padding = 12;
+
+            // Keep the button visible within the viewport.
+            const maxX = Math.max(
+                padding,
+                window.innerWidth - rect.width - padding
+            );
+
+            const maxY = Math.max(
+                padding,
+                window.innerHeight - rect.height - padding
+            );
+
+            noBtn.style.position = "fixed";
+            noBtn.style.left =
+                padding + Math.random() * (maxX - padding) + "px";
+
+            noBtn.style.top =
+                padding + Math.random() * (maxY - padding) + "px";
+
+            setTimeout(() => {
+                isMoving = false;
+            }, 230);
+        }
+
+        function heartExplosion() {
+            const rect = noBtn.getBoundingClientRect();
+
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const emojis = ["💗", "💖", "💕", "💘", "✨", "💥"];
+
+            for (let i = 0; i < 18; i++) {
+                const particle = document.createElement("span");
+
+                particle.className = "heart-particle";
+                particle.textContent =
+                    emojis[Math.floor(Math.random() * emojis.length)];
+
+                particle.style.left = centerX + "px";
+                particle.style.top = centerY + "px";
+
+                particle.style.setProperty(
+                    "--x",
+                    (Math.random() - 0.5) * 240 + "px"
+                );
+
+                particle.style.setProperty(
+                    "--y",
+                    (Math.random() - 0.5) * 240 + "px"
+                );
+
+                particle.style.setProperty(
+                    "--rotation",
+                    (Math.random() * 360 - 180) + "deg"
+                );
+
+                document.body.appendChild(particle);
+
+                particle.addEventListener("animationend", () => {
+                    particle.remove();
+                });
+            }
+        }
+
+        // Desktop: jump away when the mouse approaches.
+        noBtn.addEventListener("pointerenter", (event) => {
+            if (event.pointerType === "mouse") {
+                moveNoButton();
+            }
+        });
+
+        // Mobile: jump away when touched.
+        noBtn.addEventListener("touchstart", (event) => {
+            event.preventDefault();
+            heartExplosion();
+            moveNoButton();
+        }, { passive: false });
+
+        // Fallback for clicks and keyboard activation.
+        noBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            heartExplosion();
+            moveNoButton();
+        });
+    </script>
+
+</body>
+</html>

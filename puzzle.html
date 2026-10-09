@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#171717">
+
+    <title>A Little Secret ❤️</title>
+
+    <!-- Same fonts as index.html -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 18px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: 'Plus Jakarta Sans', sans-serif;
+
+            background-color: #222;
+            background-image: url("luvv.jpg");
+            background-size: auto 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Transparent glass card */
+        .card {
+            width: 100%;
+            max-width: 420px;
+            padding: 30px 22px;
+
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 28px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 7px 14px;
+            margin-bottom: 14px;
+
+            color: white;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 30px;
+
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            color: #ff6b98;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(34px, 9vw, 44px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+        }
+
+        .description {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.9;
+            margin-bottom: 24px;
+
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+        }
+
+        .description .highlight {
+            color: #ff9fbd;
+            font-weight: 800;
+        }
+
+        /* Memory card grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .tile {
+            width: 100%;
+            aspect-ratio: 1;
+            min-width: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 17px;
+
+            background: linear-gradient(
+                135deg,
+                rgba(255, 71, 126, 0.92),
+                rgba(225, 29, 72, 0.88)
+            );
+
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(26px, 8vw, 36px);
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+
+            transition:
+                transform 0.2s ease,
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .tile:not(.matched):hover {
+            transform: translateY(-3px);
+        }
+
+        .tile:active {
+            transform: scale(0.94);
+        }
+
+        .tile.revealed {
+            background: rgba(255, 255, 255, 0.88);
+            border-color: #ff9fbd;
+        }
+
+        .tile.matched {
+            background: rgba(220, 252, 231, 0.92);
+            border-color: #86efac;
+            cursor: default;
+        }
+
+        .tile.matched:disabled {
+            opacity: 1;
+        }
+
+        .status {
+            min-height: 42px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin-bottom: 14px;
+
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.6;
+
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+        }
+
+        /* Reveal button */
+        #secret-btn {
+            display: none;
+            width: 100%;
+            min-height: 50px;
+            padding: 14px;
+
+            border: none;
+            border-radius: 30px;
+
+            background: linear-gradient(135deg, #ff477e, #e11d48);
+            color: white;
+
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow: 0 7px 20px rgba(225, 29, 72, 0.35);
+            animation: revealPop 0.45s ease both;
+        }
+
+        #secret-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        #secret-btn:active {
+            transform: scale(0.97);
+        }
+
+        .hint {
+            margin-top: 20px;
+
+            color: #ffb2ca;
+            font-family: 'Caveat', cursive;
+            font-size: 25px;
+            font-weight: 700;
+
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+        }
+
+        @keyframes revealPop {
+            from {
+                opacity: 0;
+                transform: scale(0.88) translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 600px) {
+            body {
+                padding: 14px;
+                background-size: auto 100%;
+                background-position: center;
+                background-attachment: scroll;
+            }
+
+            .card {
+                padding: 26px 17px;
+                background: rgba(255, 255, 255, 0.12);
+            }
+
+            .grid {
+                gap: 10px;
+            }
+
+            .tile {
+                border-radius: 15px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .card {
+                padding: 23px 13px;
+            }
+
+            .grid {
+                gap: 8px;
+            }
+
+            .tile {
+                border-radius: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .tile,
+            #secret-btn {
+                transition: none;
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="card">
+
+        <span class="eyebrow">Secret Challenge ♡</span>
+
+        <h1>
+            Neethaanuu enakku theriyum 💌
+        </h1>
+
+        <p class="description">
+            Intelligent girl <span class="highlight">Dixchu</span> 🥰<br>
+            Intha game complete pannu...<br>
+            appo thaaaaa secret solven! 🤭
+        </p>
+
+        <div class="grid" id="grid"></div>
+
+        <p class="status" id="status" aria-live="polite">
+            Tap any two cards to find a match! 💗
+        </p>
+
+        <button id="secret-btn" type="button" onclick="openSecret()">
+            Reveal My Secret ❤️
+        </button>
+
+        <p class="hint">
+            Challakuttttttyyyyy 💗
+        </p>
+
+    </main>
+
+    <script>
+        const symbols = ["❤️", "👑", "💎", "❤️", "👑", "💎"];
+
+        const grid = document.getElementById("grid");
+        const status = document.getElementById("status");
+        const secretBtn = document.getElementById("secret-btn");
+
+        let firstCard = null;
+        let secondCard = null;
+        let locked = false;
+        let matchedPairs = 0;
+
+        // Shuffle cards fairly using Fisher-Yates.
+        const cards = [...symbols];
+
+        for (let i = cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [cards[i], cards[j]] = [cards[j], cards[i]];
+        }
+
+        // Create the six cards.
+        cards.forEach((symbol, index) => {
+            const button = document.createElement("button");
+
+            button.className = "tile";
+            button.type = "button";
+            button.textContent = "?";
+            button.setAttribute(
+                "aria-label",
+                `Hidden card ${index + 1}`
+            );
+
+            button.addEventListener("click", () => {
+                flipCard(button, symbol);
+            });
+
+            grid.appendChild(button);
+        });
+
+        function flipCard(card, symbol) {
+            if (
+                locked ||
+                card.classList.contains("revealed") ||
+                card.classList.contains("matched")
+            ) {
+                return;
+            }
+
+            card.textContent = symbol;
+            card.classList.add("revealed");
+            card.setAttribute("aria-label", symbol);
+
+            if (firstCard === null) {
+                firstCard = { card, symbol };
+                status.textContent = "Now find its matching pair! 💕";
+                return;
+            }
+
+            secondCard = { card, symbol };
+
+            if (firstCard.symbol === secondCard.symbol) {
+                firstCard.card.classList.remove("revealed");
+                secondCard.card.classList.remove("revealed");
+
+                firstCard.card.classList.add("matched");
+                secondCard.card.classList.add("matched");
+
+                firstCard.card.disabled = true;
+                secondCard.card.disabled = true;
+
+                matchedPairs++;
+
+                firstCard = null;
+                secondCard = null;
+
+                if (matchedPairs === 3) {
+                    status.textContent = "You did it, Dixu! 🎉❤️";
+                    secretBtn.style.display = "block";
+                } else {
+                    status.textContent = "Match found! Keep going ❤️";
+                }
+            } else {
+                locked = true;
+                status.textContent = "Not a match! Try again 🙈";
+
+                const previousFirst = firstCard;
+                const previousSecond = secondCard;
+
+                setTimeout(() => {
+                    previousFirst.card.textContent = "?";
+                    previousSecond.card.textContent = "?";
+
+                    previousFirst.card.classList.remove("revealed");
+                    previousSecond.card.classList.remove("revealed");
+
+                    previousFirst.card.setAttribute(
+                        "aria-label",
+                        "Hidden card"
+                    );
+
+                    previousSecond.card.setAttribute(
+                        "aria-label",
+                        "Hidden card"
+                    );
+
+                    firstCard = null;
+                    secondCard = null;
+                    locked = false;
+
+                    status.textContent = "Try another pair! ✨";
+                }, 800);
+            }
+        }
+
+        function openSecret() {
+            window.location.href = "secret.html";
+        }
+    </script>
+
+</body>
+</html>

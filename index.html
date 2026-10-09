@@ -1,58 +1,299 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#171717">
 
-    <title>Sanjay Quiz</title>
+    <title>For Dixitha ♡</title>
 
-    <link rel="stylesheet" href="style.css">
+    <!-- Romantic fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #222;
+            background-image: url("luvv.jpg");
+            background-size: auto 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Transparent glass card */
+        .card {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            padding: 38px 24px;
+
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            border-radius: 28px;
+            text-align: center;
+
+            box-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        h1 {
+            color: #ff477e;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(44px, 11vw, 58px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            text-shadow: 0 2px 15px rgba(255, 255, 255, 0.4);
+        }
+
+        h2 {
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(18px, 5vw, 21px);
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+        }
+
+        .buttons {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            min-height: 60px;
+        }
+
+        .yes-link {
+            display: inline-flex;
+            text-decoration: none;
+        }
+
+        button {
+            min-height: 49px;
+            padding: 13px 29px;
+            border: 1px solid transparent;
+            border-radius: 30px;
+
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Yes button */
+        #yes-btn {
+            color: #ffffff;
+            background: linear-gradient(
+                135deg,
+                #ff477e,
+                #e11d48
+            );
+
+            box-shadow: 0 6px 20px rgba(225, 29, 72, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #yes-btn:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 10px 25px rgba(225, 29, 72, 0.45);
+        }
+
+        /* Moving No button */
+        #no-btn {
+            position: relative;
+            z-index: 5;
+
+            color: #ffffff;
+            background: rgba(30, 30, 30, 0.55);
+            border-color: rgba(255, 255, 255, 0.4);
+
+            white-space: nowrap;
+            touch-action: manipulation;
+
+            transition:
+                left 0.22s ease,
+                top 0.22s ease,
+                background 0.2s;
+        }
+
+        #no-btn:hover {
+            background: rgba(70, 70, 70, 0.75);
+        }
+
+        .footer {
+            color: #ffffff;
+            font-family: 'Caveat', cursive;
+            font-size: 23px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-top: 26px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+                background-size: auto 100%;
+                background-position: center center;
+                background-attachment: scroll;
+            }
+
+            .card {
+                padding: 32px 18px;
+                background: rgba(255, 255, 255, 0.10);
+                border-radius: 25px;
+            }
+
+            h1 {
+                font-size: clamp(43px, 12vw, 52px);
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            .buttons {
+                gap: 12px;
+            }
+
+            button {
+                padding: 13px 24px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .card {
+                padding: 27px 12px;
+            }
+
+            .buttons {
+                gap: 8px;
+            }
+
+            button {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            button {
+                transition: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- BACKGROUND VIDEO -->
-    <video class="background-video" autoplay muted loop playsinline>
-        <source src="kumardance.mp4" type="video/mp4">
-    </video>
+    <main class="card">
 
-    <!-- DARK LAYER OVER VIDEO -->
-    <div class="overlay"></div>
+        <h1>Excuse Me 😗</h1>
 
+        <h2>Are you Dixitha?</h2>
 
-    <!-- QUESTION -->
-    <main class="question-box">
+        <div class="buttons" id="button-area">
 
-        <h1>Sanjay oda original per enna?</h1>
+            <a href="yes.html" class="yes-link">
+                <button id="yes-btn" type="button">
+                    Yes ♡
+                </button>
+            </a>
 
-        <div class="options">
-
-            <button onclick="checkAnswer('potta')">
-                A) Potta Kumar
-            </button>
-
-            <button onclick="checkAnswer('pombala')">
-                B) Pombala Kumar
-            </button>
-
-            <button onclick="checkAnswer('punda')">
-                C) Punda Kumar
-            </button>
-
-            <button onclick="checkAnswer('bot')">
-                D) Bot Kumar
+            <button id="no-btn" type="button">
+                No
             </button>
 
         </div>
 
-        <p id="result"></p>
+        <p class="footer">
+            Only my girl Dixu can enter ♡
+        </p>
 
     </main>
 
+    <script>
+        const noBtn = document.getElementById("no-btn");
+        const card = document.querySelector(".card");
 
-    <script src="script.js"></script>
+        let isMoving = false;
+
+        function moveNoButton() {
+            if (isMoving) return;
+
+            isMoving = true;
+
+            const cardRect = card.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+
+            const padding = 12;
+
+            const minX = cardRect.left + padding;
+            const maxX = cardRect.right - btnRect.width - padding;
+
+            const minY = cardRect.top + 75;
+            const maxY = cardRect.bottom - btnRect.height - 45;
+
+            if (maxX > minX && maxY > minY) {
+                noBtn.style.position = "fixed";
+
+                noBtn.style.left =
+                    minX + Math.random() * (maxX - minX) + "px";
+
+                noBtn.style.top =
+                    minY + Math.random() * (maxY - minY) + "px";
+            }
+
+            setTimeout(() => {
+                isMoving = false;
+            }, 230);
+        }
+
+        // Desktop: jump when the mouse approaches.
+        noBtn.addEventListener("pointerenter", (event) => {
+            if (event.pointerType === "mouse") {
+                moveNoButton();
+            }
+        });
+
+        // Mobile: jump when touched.
+        noBtn.addEventListener("touchstart", (event) => {
+            event.preventDefault();
+            moveNoButton();
+        }, { passive: false });
+
+        // Fallback for clicks.
+        noBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            moveNoButton();
+        });
+    </script>
 
 </body>
-
 </html>
